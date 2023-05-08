@@ -1,11 +1,17 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {
   NotificationServices,
   requestUserPermission,
 } from './src/utils/PushNotifications';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
+  const removeFcm = async () => {
+    await AsyncStorage.removeItem('fcmToken');
+    console.log('Key removed successfully.');
+  };
+
   useEffect(() => {
     requestUserPermission();
     NotificationServices();
@@ -13,6 +19,11 @@ const App = () => {
   return (
     <View style={styles.containerStyle}>
       <Text style={styles.textStyle}>App</Text>
+      <TouchableOpacity onPress={removeFcm}>
+        <View style={styles.buttonViewStyles}>
+          <Text style={styles.buttonStyles}>Remove Fcm</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -27,5 +38,12 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 50,
+  },
+  buttonStyles: {
+    color: 'white',
+  },
+  buttonViewStyles: {
+    backgroundColor: 'blue',
+    padding: 10,
   },
 });

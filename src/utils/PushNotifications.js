@@ -33,7 +33,7 @@ const getFcmToken = async () => {
   console.log('Old fcm Token: ', fcmToken);
   if (!fcmToken) {
     try {
-      const fcmToken = await messaging().getToken();
+      fcmToken = await messaging().getToken();
       if (fcmToken) {
         console.log('New genrated fcm Token: ', fcmToken);
         await AsyncStorage.setItem('fcmToken', fcmToken);
