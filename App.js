@@ -1,7 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {
+  NotificationServices,
+  requestUserPermission,
+} from './src/utils/PushNotifications';
 
 const App = () => {
+  useEffect(() => {
+    requestUserPermission();
+    NotificationServices();
+  }, []);
   return (
     <View style={styles.containerStyle}>
       <Text style={styles.textStyle}>App</Text>
