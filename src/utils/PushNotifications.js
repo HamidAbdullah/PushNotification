@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import messaging from '@react-native-firebase/messaging';
+import NavigationService from '../screens/Nevigation/NavigationService';
 
 /**
  * This code is a function that requests permission from the user
@@ -54,6 +55,10 @@ const getFcmToken = async () => {
 };
 
 export const NotificationServices = () => {
+  const unsubscribe = messaging().onMessage(async remoteMessage => {
+    console.log('A new FCM message arrived!', remoteMessage);
+  });
+
   /**
    * This method listens for notifications that were used to open
    *  the app from a background state.When a notification is
@@ -63,8 +68,14 @@ export const NotificationServices = () => {
   messaging().onNotificationOpenedApp(remoteMessage => {
     console.log(
       'Notification caused app to open from background state:',
-      remoteMessage.notification,
+      remoteMessage,
     );
+
+    if (!!remoteMessage?.data?.redirect_To !== '') {
+      setTimeout(() => {
+        NavigationService.navigate(remoteMessage.data.redirect_To);
+      }, 1200);
+    }
   });
 
   // Foreground message handling
