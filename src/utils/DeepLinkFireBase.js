@@ -10,7 +10,7 @@ const DeepLinkFireBase = () => {
     const link = await dynamicLinks().buildLink({
       link: 'https://invertase.io/offer',
       // domainUriPrefix is created in your Firebase console
-      domainUriPrefix: 'https://pushnotificationsjs12.page.link',
+      domainUriPrefix: 'https://pushnotifications12.page.link',
       // optional setup which updates Firebase analytics campaign
       // "banner". This also needs setting up before hand
       analytics: {
@@ -21,28 +21,28 @@ const DeepLinkFireBase = () => {
     setGenrateLink(link);
   };
 
-  const handleDynamicLink = link => {
-    // Handle dynamic link inside your own application
-    if (link.url === 'https://invertase.io/offer') {
-      console.log('hello');
-    }
-  };
+  // const handleDynamicLink = link => {
+  //   // Handle dynamic link inside your own application
+  //   if (link.url === 'https://invertase.io/offer') {
+  //     console.log('hello');
+  //   }
+  // };
 
-  useEffect(() => {
-    const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
-    // When the component is unmounted, remove the listener
-    return () => unsubscribe();
-  }, []);
+  // useEffect(() => {
+  //   const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
+  //   // When the component is unmounted, remove the listener
+  //   return () => unsubscribe();
+  // }, []);
 
-  useEffect(() => {
-    dynamicLinks()
-      .getInitialLink()
-      .then(link => {
-        if (link.url === 'https://invertase.io/offer') {
-          // ...set initial route as offers screen
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   dynamicLinks()
+  //     .getInitialLink()
+  //     .then(link => {
+  //       if (link.url === 'https://invertase.io/offer') {
+  //         // ...set initial route as offers screen
+  //       }
+  //     });
+  // }, []);
 
   return (
     <View>

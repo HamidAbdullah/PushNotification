@@ -28,7 +28,7 @@
             <category android:name="android.intent.category.BROWSABLE" />
             <!-- Accepts URIs that begin with "example://gizmos” -->
             <data android:scheme="https"
-                android:host="pushnotificaionsjs12.page.link" />
+                android:host="pushnotifications12.page.link" />
         </intent-filter>
       </activity>
     </application>
