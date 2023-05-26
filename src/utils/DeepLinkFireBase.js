@@ -2,6 +2,7 @@ import dynamicLinks from '@react-native-firebase/dynamic-links';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Clipboard from '@react-native-community/clipboard';
+import NavigationService from '../screens/Nevigation/NavigationService';
 
 const DeepLinkFireBase = () => {
   const [genrateLink, setGenrateLink] = useState('');
@@ -21,28 +22,42 @@ const DeepLinkFireBase = () => {
     setGenrateLink(link);
   };
 
-  // const handleDynamicLink = link => {
-  //   // Handle dynamic link inside your own application
-  //   if (link.url === 'https://invertase.io/offer') {
-  //     console.log('hello');
-  //   }
-  // };
+  const handleDynamicLink = link => {
+    // Handle dynamic link inside your own application
+    try {
+      if (link && link.url === 'https://invertase.io/offer') {
+        NavigationService.navigate('Profile');
+      } else {
+        // eslint-disable-next-line no-alert
+        alert('Link not found');
+      }
+    } catch (error) {
+      console.log('error found in handleDynamicLink', error);
+    }
+  };
 
-  // useEffect(() => {
-  //   const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
-  //   // When the component is unmounted, remove the listener
-  //   return () => unsubscribe();
-  // }, []);
+  useEffect(() => {
+    const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
+    // When the component is unmounted, remove the listener
+    return () => unsubscribe();
+  }, []);
 
-  // useEffect(() => {
-  //   dynamicLinks()
-  //     .getInitialLink()
-  //     .then(link => {
-  //       if (link.url === 'https://invertase.io/offer') {
-  //         // ...set initial route as offers screen
-  //       }
-  //     });
-  // }, []);
+  useEffect(() => {
+    dynamicLinks()
+      .getInitialLink()
+      .then(link => {
+        try {
+          if (link.url === 'https://invertase.io/offer') {
+            NavigationService.navigate('Profile');
+          } else {
+            // eslint-disable-next-line no-alert
+            alert('Link not found');
+          }
+        } catch (error) {
+          console.log('error found in handleDynamicLink', error);
+        }
+      });
+  }, []);
 
   return (
     <View>

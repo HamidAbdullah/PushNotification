@@ -74,7 +74,7 @@ export const NotificationServices = () => {
     if (!!remoteMessage?.data?.redirect_To !== '') {
       setTimeout(() => {
         NavigationService.navigate(remoteMessage.data.redirect_To);
-      }, 1200);
+      }, 500);
     }
   });
 
