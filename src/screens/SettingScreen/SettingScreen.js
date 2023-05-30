@@ -8,7 +8,7 @@ const SettingScreen = () => {
   return (
     <View>
       <Text style={styles.textStyle}>SettingScreen</Text>
-      <Image source={{uri: image}} style={{width: 400, height: 400}} />
+      <Image source={{uri: image}} style={styles.imgStyle} />
       <DeepLinkFireBase imageLink={'Setting'} />
     </View>
   );
@@ -21,5 +21,9 @@ const styles = StyleSheet.create({
     color: 'black',
     marginTop: 20,
     fontSize: 50,
+  },
+  imgStyle: {
+    width: 400,
+    height: 400,
   },
 });
