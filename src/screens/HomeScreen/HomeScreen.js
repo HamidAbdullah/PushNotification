@@ -1,7 +1,6 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import DeepLinkFireBase from '../../../src/utils/DeepLinkFireBase';
 
 const HomeScreen = ({navigation}) => {
   const removeFcm = async () => {
@@ -18,13 +17,17 @@ const HomeScreen = ({navigation}) => {
             <Text style={styles.buttonStyles}>Remove Fcm</Text>
           </View>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <View style={styles.buttonViewStyles}>
+            <Text style={styles.buttonStyles}>Profile </Text>
+          </View>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
           <View style={styles.buttonViewStyles}>
             <Text style={styles.buttonStyles}>Setting</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <DeepLinkFireBase />
     </View>
   );
 };

@@ -1,10 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
+import DeepLinkFireBase from '../../utils/DeepLinkFireBase';
 
 const ProfileDetail = () => {
+  const image = 'https://picsum.photos/200/300';
   return (
     <View>
       <Text style={styles.textStyle}>ProfileDetail</Text>
+      <Image source={{uri: image}} style={{width: 400, height: 400}} />
+      <DeepLinkFireBase imageLink={'Profile'} />
     </View>
   );
 };

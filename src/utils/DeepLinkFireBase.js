@@ -1,15 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import dynamicLinks from '@react-native-firebase/dynamic-links';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Clipboard from '@react-native-community/clipboard';
 import NavigationService from '../screens/Nevigation/NavigationService';
 
-const DeepLinkFireBase = () => {
+const DeepLinkFireBase = ({imageLink}) => {
   const [genrateLink, setGenrateLink] = useState('');
 
   const buildLink = async () => {
     const link = await dynamicLinks().buildLink({
-      link: 'https://invertase.io/offer',
+      link: `https://invertase.io/${imageLink}`,
       // domainUriPrefix is created in your Firebase console
       domainUriPrefix: 'https://pushnotifications12.page.link',
       // optional setup which updates Firebase analytics campaign
@@ -25,8 +26,8 @@ const DeepLinkFireBase = () => {
   const handleDynamicLink = link => {
     // Handle dynamic link inside your own application
     try {
-      if (link && link.url === 'https://invertase.io/offer') {
-        NavigationService.navigate('Profile');
+      if (link && link.url === `https://invertase.io/${imageLink}`) {
+        NavigationService.navigate('Setting');
       } else {
         // eslint-disable-next-line no-alert
         alert('Link not found');
@@ -47,7 +48,7 @@ const DeepLinkFireBase = () => {
       .getInitialLink()
       .then(link => {
         try {
-          if (link.url === 'https://invertase.io/offer') {
+          if (link.url === `https://invertase.io/${imageLink}`) {
             NavigationService.navigate('Profile');
           } else {
             // eslint-disable-next-line no-alert
