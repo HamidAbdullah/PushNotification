@@ -8,7 +8,7 @@ const ProfileDetail = () => {
     <View>
       <Text style={styles.textStyle}>ProfileDetail</Text>
       <Image source={{uri: image}} style={styles.imgStyle} />
-      <DeepLinkFireBase imageLink={'Profile'} />
+      <DeepLinkFireBase imageLink={'Profil'} />
     </View>
   );
 };

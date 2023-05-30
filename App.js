@@ -14,7 +14,7 @@ const App = () => {
     try {
       const navigationLink = link.url.split('/').pop().split('%2F').pop();
 
-      if (navigationLink) {
+      if (navigationLink !== '') {
         NavigationService.navigate(navigationLink);
       } else {
         alert('Link not found');
