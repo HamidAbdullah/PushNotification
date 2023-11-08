@@ -1,29 +1,76 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
-import React from 'react';
-import DeepLinkFireBase from '../../utils/DeepLinkFireBase';
+import React, {useState, useEffect} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import recitersData from '../../constants/reciterData';
 
-const SettingScreen = () => {
-  const image =
-    'https://img.freepik.com/free-vector/isolated-tree-white-background_1308-26130.jpg?w=996&t=st=1685424746~exp=1685425346~hmac=794a48f508e342c12de67aa28c06a98a2cf6c813465cf9a452c3767af7ea0926';
+const Setting = () => {
+  const [selectedQari, setSelectedQari] = useState(null);
+  useEffect(() => {
+    getReciter();
+  }, []);
+
+  const setRectier = async qari => {
+    try {
+      await AsyncStorage.setItem('selectedQari', JSON.stringify(qari));
+    } catch (error) {
+      console.log('error:', error);
+    }
+  };
+
+  const getReciter = async () => {
+    try {
+      const savedQari = await AsyncStorage.getItem('selectedQari');
+      if (savedQari) {
+        const parsedQari = JSON.parse(savedQari);
+        setSelectedQari(parsedQari);
+      }
+    } catch (error) {
+      console.log('error:', error);
+    }
+  };
+
+  const handleReciter = qari => {
+    setSelectedQari(qari);
+    setRectier(qari);
+  };
+
   return (
     <View>
-      <Text style={styles.textStyle}>SettingScreen</Text>
-      <Image source={{uri: image}} style={styles.imgStyle} />
-      <DeepLinkFireBase imageLink={'Setting'} />
+      {recitersData.map(qari => (
+        <TouchableOpacity
+          key={qari.id}
+          onPress={() => handleReciter(qari)}
+          style={styles.button}>
+          <Text style={styles.name}>{qari.name}</Text>
+        </TouchableOpacity>
+      ))}
+      <Text style={styles.button}>
+        Selected Reciter:{' '}
+        {selectedQari ? selectedQari.name : 'Abdul Rehman Al Sudais'}
+      </Text>
     </View>
   );
 };
 
-export default SettingScreen;
+export default Setting;
 
 const styles = StyleSheet.create({
-  textStyle: {
-    color: 'black',
-    marginTop: 20,
-    fontSize: 50,
+  imageStyle: {
+    height: 50,
+    width: 50,
   },
-  imgStyle: {
-    width: 400,
-    height: 400,
+  name: {
+    color: 'black',
+    fontWeight: '900',
+  },
+  button: {
+    flexDirection: 'row',
+    padding: 10,
+    marginHorizontal: 30,
+    alignSelf: 'center',
+    backgroundColor: '#fff',
+    elevation: 5,
+    borderRadius: 10,
+    marginVertical: 10,
   },
 });

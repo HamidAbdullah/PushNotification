@@ -3,12 +3,12 @@ import React from 'react';
 import DeepLinkFireBase from '../../utils/DeepLinkFireBase';
 
 const ProfileDetail = () => {
-  const image = 'https://picsum.photos/200/300';
+  const image = 'https://picsum.photos/id/237/200/300';
   return (
     <View>
       <Text style={styles.textStyle}>ProfileDetail</Text>
       <Image source={{uri: image}} style={styles.imgStyle} />
-      <DeepLinkFireBase imageLink={'Profil'} />
+      <DeepLinkFireBase imageLink={'Profile'} />
     </View>
   );
 };
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
   },
   imgStyle: {
-    width: 400,
-    height: 400,
+    width: 370,
+    height: 250,
   },
 });

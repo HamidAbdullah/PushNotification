@@ -4,13 +4,14 @@ import React, {useState} from 'react';
 import Clipboard from '@react-native-community/clipboard';
 
 const DeepLinkFireBase = ({imageLink}) => {
+  console.log('Image Link :', imageLink);
   const [genrateLink, setGenrateLink] = useState('');
 
   const buildLink = async () => {
     const link = await dynamicLinks().buildLink({
       link: `https://invertase.io/${imageLink}`,
       // domainUriPrefix is created in your Firebase console
-      domainUriPrefix: 'https://pushnotifications12.page.link',
+      domainUriPrefix: 'https://deeplinking10.page.link',
       // optional setup which updates Firebase analytics campaign
       // "banner". This also needs setting up before hand
       analytics: {
@@ -23,7 +24,6 @@ const DeepLinkFireBase = ({imageLink}) => {
 
   return (
     <View>
-      <Text style={styles.textStyle}>{genrateLink}</Text>
       <TouchableOpacity
         onPress={() => {
           buildLink();
@@ -32,6 +32,7 @@ const DeepLinkFireBase = ({imageLink}) => {
           <Text style={styles.buttonStyles}>genrateLink</Text>
         </View>
       </TouchableOpacity>
+      <Text style={styles.textStyle}>{genrateLink}</Text>
       <TouchableOpacity
         onPress={() => {
           Clipboard.setString(genrateLink);
@@ -51,10 +52,17 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   buttonViewStyles: {
-    backgroundColor: 'blue',
-    padding: 10,
+    padding: 20,
+    backgroundColor: 'green',
+    alignItems: 'center',
+    borderRadius: 30,
+    marginVertical: 10,
+    marginHorizontal: 20,
   },
   textStyle: {
     color: 'black',
+    fontSize: 20,
+    marginHorizontal: 20,
+    // marginVertical: 20,
   },
 });
